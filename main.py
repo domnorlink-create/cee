@@ -1,6 +1,6 @@
 from fasthtml.common import *
 
-# កំណត់ការទាញយកកញ្ចប់ Tailwind CSS និងស្ទីលពុម្ពអក្សរ (Fonts) នៅក្នុង Head
+# Initialize FastHTML application
 app, rt = FastHTML(
     hdrs=(
         Script(src="https://cdn.tailwindcss.com"),
@@ -45,7 +45,6 @@ def get():
             # Language Switcher with Country Icon Layout
             Div(
                 Div(
-                    # Custom SVG element for Cambodia Flag
                     Svg(
                         Path(fill="#032ea1", d="M0 0h512v85.3H0zm0 255.7h512V341H0z"),
                         Path(fill="#e11d48", d="M0 85.3h512v170.4H0z"),
@@ -75,7 +74,6 @@ def get():
 
     # MAIN CONTENT BODY
     main_content = Main(
-        # Platform Selector Filter Layout
         Div(
             Button("Windows App", cls="bg-yellow-500 hover:bg-yellow-600 text-slate-950 font-semibold text-xs px-5 py-2.5 rounded-lg transition-all shadow-md shadow-yellow-500/10"),
             Button("Office Add-ins (Soon)", cls="bg-slate-900 opacity-60 cursor-not-allowed border border-slate-800 text-slate-400 text-xs px-5 py-2.5 rounded-lg"),
@@ -83,7 +81,6 @@ def get():
             cls="flex justify-center gap-2 mb-12"
         ),
         
-        # Software Grid Units
         Div(
             # Card 1: ACTIVE LIVE WINDOWS APP
             Div(
@@ -176,13 +173,14 @@ def get():
         cls="border-t border-slate-900 bg-slate-900/40 w-full"
     )
 
-    # ប្រគល់តម្លៃត្រឡប់ទៅកាន់ Body
     return Title("មជ្ឈមណ្ឌលទាញយកកម្មវិធី — CAMBODIA EXCHANGE"), Body(
-        header,
-        hero_section,
-        main_content,
-        footer,
+        header, hero_section, main_content, footer,
         cls="text-slate-200 antialiased min-h-full flex flex-col"
     )
 
-serve()
+# EXPLICIT ALIAS ASSIGNMENT FOR VERCEL ENGINE TO DETECT
+application = app
+handler = app
+
+if __name__ == "__main__":
+    serve()
