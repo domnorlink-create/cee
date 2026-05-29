@@ -158,10 +158,10 @@ def get():
         cls="mx-auto max-w-7xl px-6 py-12 flex-grow w-full"
     )
 
-    # FOOTER
+    # FOOTER (Updated to DOWNLOAD CENTER)
     footer = Footer(
         Div(
-            Div("© 2026 CAMBODIA EXCHANGE · រក្សាសិទ្ធិគ្រប់យ៉ាង។", cls="mono-data"),
+            Div("© 2026 DOWNLOAD CENTER · រក្សាសិទ្ធិគ្រប់យ៉ាង។", cls="mono-data"),
             Div(
                 A("ឯកជនភាព", href="https://www.cambodiaexchange.today/privacy", cls="hover:text-yellow-500 transition-colors"),
                 A("លក្ខខណ្ឌប្រើប្រាស់", href="https://www.cambodiaexchange.today/terms", cls="hover:text-yellow-500 transition-colors"),
@@ -179,7 +179,7 @@ def get():
         cls="text-slate-200 antialiased min-h-full flex flex-col"
     )
 
-# Required serverless binding hooks for Vercel Engine execution paths
+# Expose server application hooks directly for root-level deployment environments
 app = app
 application = app
 handler = app
