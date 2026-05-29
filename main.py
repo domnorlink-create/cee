@@ -1,7 +1,6 @@
 from fasthtml.common import *
 
-# FIX 1: Explicitly pass an in-memory database state 
-# This prevents FastHTML from attempting to write to Vercel's read-only file system.
+# Initialize FastHTML application with an in-memory database configuration
 app, rt = FastHTML(
     db_file=":memory:", 
     hdrs=(
@@ -24,14 +23,14 @@ def get():
     # HEADER / NAVIGATION
     header = Header(
         Div(
-            # Logo & Brand Alignment
+            # Logo & Brand Alignment (Updated to DOWNLOAD CENTER)
             Div(
                 Div(
-                    Span("CE", cls="font-bold tracking-tighter text-slate-950 text-base mono-data"),
+                    Span("DC", cls="font-bold tracking-tighter text-slate-950 text-base mono-data"),
                     cls="h-10 w-10 rounded-xl bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-500/10"
                 ),
                 Div(
-                    Span("CAMBODIA EXCHANGE", cls="font-bold tracking-wider text-white text-base block leading-none"),
+                    Span("DOWNLOAD CENTER", cls="font-bold tracking-wider text-white text-base block leading-none"),
                     Span("ឯកសារយោងគណនេយ្យ និងឧបករណ៍ឌីជីថល", cls="text-[10px] text-slate-400 block mt-1"),
                 ),
                 cls="flex items-center gap-3"
@@ -175,16 +174,15 @@ def get():
         cls="border-t border-slate-900 bg-slate-900/40 w-full"
     )
 
-    return Title("មជ្ឈមណ្ឌលទាញយកកម្មវិធី — CAMBODIA EXCHANGE"), Body(
+    return Title("មជ្ឈមណ្ឌលទាញយកកម្មវិធី — DOWNLOAD CENTER"), Body(
         header, hero_section, main_content, footer,
         cls="text-slate-200 antialiased min-h-full flex flex-col"
     )
 
-# Explicit assignment target exports for Vercel Engine
+# Required serverless binding hooks for Vercel Engine execution paths
 app = app
 application = app
 handler = app
 
-# FIX 2: Only call serve() if running locally, never inside Vercel Serverless Function context
 if __name__ == "__main__":
     serve()
