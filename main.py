@@ -1,7 +1,9 @@
 from fasthtml.common import *
 
-# Initialize FastHTML application
+# FIX 1: Explicitly pass an in-memory database state 
+# This prevents FastHTML from attempting to write to Vercel's read-only file system.
 app, rt = FastHTML(
+    db_file=":memory:", 
     hdrs=(
         Script(src="https://cdn.tailwindcss.com"),
         Style("""
@@ -178,9 +180,11 @@ def get():
         cls="text-slate-200 antialiased min-h-full flex flex-col"
     )
 
-# EXPLICIT ALIAS ASSIGNMENT FOR VERCEL ENGINE TO DETECT
+# Explicit assignment target exports for Vercel Engine
+app = app
 application = app
 handler = app
 
+# FIX 2: Only call serve() if running locally, never inside Vercel Serverless Function context
 if __name__ == "__main__":
     serve()
